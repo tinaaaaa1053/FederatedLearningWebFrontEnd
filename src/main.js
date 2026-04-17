@@ -6,8 +6,12 @@ import './assets/tailwind.css'
 // 导入ECharts
 import * as echarts from 'echarts'
 
-// 导入Mock数据(开发环境)
-if (import.meta.env.MODE === 'development') {
+/**
+ * 重点修改：受控的 Mock 加载逻辑
+ * 只有当环境变量 VITE_USE_MOCK 为 'true' 时，才拦截网络请求
+ */
+if (import.meta.env.VITE_USE_MOCK === 'true') {
+  console.warn('检测到 VITE_USE_MOCK=true，前端 Mock 拦截已启动');
   import('./mock/dashboard')
   import('./mock/jobManagement')
   import('./mock/modelManagement')

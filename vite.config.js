@@ -15,10 +15,12 @@ export default defineConfig({
     host: true,
     open: true,
     proxy: {
+      // 代理所有以 /api 开头的请求
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'http://127.0.0.1:3000', // 将 localhost 改为 127.0.0.1 后端 Python 服务地址
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        // rewrite: (path) => path.replace(/^\/api/, '') // <--- 这一行必须删掉或注释掉
+        // 删掉后：请求 /api/jobs -> 转发到 http://localhost:3000/api/jobs (正确)
       }
     }
   },
